@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - CodePlayground</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+                <i class="fas fa-code"></i> CodePlayground
+            </a>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn" onclick="location.href='chatbox.html?users.id=' + currentUserId">
+                <i class="fas fa-envelope"></i>
+                <span class="badge" id="messageCount">0</span>
+            </button>
+            <button class="nav-btn" onclick="location.href='console.html?users.id=' + currentUserId">
+                <i class="fas fa-terminal"></i>
+            </button>
+            <button class="nav-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h1 id="userName">Loading...</h1>
+                <p class="user-id">ID: <span id="userId">-</span></p>
+                <p class="user-role" id="userRole">User</p>
+            </div>
+            <div class="profile-actions" id="profileActions">
+                <button class="btn btn-primary" onclick="startChat()">
+                    <i class="fas fa-comment"></i> Chat Sekarang
+                </button>
+                <button class="btn btn-secondary" onclick="addFriend()">
+                    <i class="fas fa-user-plus"></i> Add Friend
+                </button>
+            </div>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-save"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="saveCount">0</h3>
+                    <p>Saved Projects</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="friendCount">0</h3>
+                    <p>Friends</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="lastLogin">-</h3>
+                    <p>Last Login</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="registeredAt">-</h3>
+                    <p>Registered</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div class="content-tabs">
+                <button class="tab-btn active" data-tab="friends">
+                    <i class="fas fa-users"></i> Friends
+                </button>
+                <button class="tab-btn" data-tab="projects">
+                    <i class="fas fa-folder"></i> Projects
+                </button>
+                <button class="tab-btn" data-tab="activity">
+                    <i class="fas fa-chart-line"></i> Activity
+                </button>
+            </div>
+
+            <div class="tab-content active" id="friends">
+                <div class="friends-grid" id="friendsList">
+                    <div class="empty-state">
+                        <i class="fas fa-user-friends"></i>
+                        <p>No friends yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="projects">
+                <div class="projects-grid" id="projectsList">
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No projects yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="activity">
+                <div class="activity-list" id="activityList">
+                    <div class="empty-state">
+                        <i class="fas fa-history"></i>
+                        <p>No activity yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="assets/js/profile.js"></script>
+    <script src="assets/js/protection.js"></script>
+</body>
+</html>

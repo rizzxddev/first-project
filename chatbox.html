@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox - CodePlayground</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/chatbox.css">
+</head>
+<body>
+    <div class="chatbox-container">
+        <div class="chatbox-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-code"></i> CodePlayground
+                </a>
+                <button class="nav-btn" onclick="location.href='profile.html?users.id=' + currentUserId">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-tabs">
+                <button class="sidebar-tab active" data-tab="inbox">
+                    <i class="fas fa-inbox"></i> Inbox
+                    <span class="badge" id="inboxCount">0</span>
+                </button>
+                <button class="sidebar-tab" data-tab="spam">
+                    <i class="fas fa-exclamation-triangle"></i> Spam
+                </button>
+                <button class="sidebar-tab" data-tab="notifications">
+                    <i class="fas fa-bell"></i> Notifications
+                    <span class="badge" id="notifCount">0</span>
+                </button>
+                <button class="sidebar-tab" data-tab="events">
+                    <i class="fas fa-calendar"></i> Events
+                </button>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="tab-panel active" id="inbox">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search messages..." id="searchInput">
+                    </div>
+                    <div class="message-list" id="messageList">
+                        <div class="empty-state">
+                            <i class="fas fa-envelope-open"></i>
+                            <p>No messages yet</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-panel" id="spam">
+                    <div class="message-list">
+                        <div class="empty-state">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>No spam messages</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-panel" id="notifications">
+                    <div class="notification-list" id="notificationList">
+                        <div class="empty-state">
+                            <i class="fas fa-bell-slash"></i>
+                            <p>No notifications</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-panel" id="events">
+                    <div class="event-list" id="eventList">
+                        <div class="empty-state">
+                            <i class="fas fa-calendar-times"></i>
+                            <p>No events</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chatbox-main">
+            <div class="chat-header" id="chatHeader">
+                <div class="chat-user-info">
+                    <div class="chat-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h3 id="chatUserName">Select a conversation</h3>
+                        <p id="chatUserStatus">-</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn" onclick="location.href='console.html?users.id=' + currentUserId">
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <button class="action-btn" onclick="clearChat()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-message">
+                    <i class="fas fa-comments"></i>
+                    <h2>Welcome to ChatBox</h2>
+                    <p>Select a conversation to start chatting</p>
+                </div>
+            </div>
+            
+            <div class="chat-input-container" id="chatInputContainer" style="display: none;">
+                <div class="emoji-picker" id="emojiPicker" style="display: none;">
+                    <button onclick="insertEmoji('😀')">😀</button>
+                    <button onclick="insertEmoji('😂')">😂</button>
+                    <button onclick="insertEmoji('😍')">😍</button>
+                    <button onclick="insertEmoji('🎉')">🎉</button>
+                    <button onclick="insertEmoji('👍')">👍</button>
+                    <button onclick="insertEmoji('❤️')">❤️</button>
+                    <button onclick="insertEmoji('🔥')">🔥</button>
+                    <button onclick="insertEmoji('💯')">💯</button>
+                </div>
+                <div class="chat-input">
+                    <button class="input-btn" onclick="toggleEmojiPicker()">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                    <textarea id="messageInput" placeholder="Type a message... (max 1000 characters)" maxlength="1000" rows="1"></textarea>
+                    <div class="char-count">
+                        <span id="charCount">0</span>/1000
+                    </div>
+                    <button class="send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="format-hint">
+                    Use *text* for <strong>bold</strong> and _text_ for <em>italic</em>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/chatbox.js"></script>
+    <script src="assets/js/protection.js"></script>
+</body>
+</html>

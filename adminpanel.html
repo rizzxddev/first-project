@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - CodePlayground</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-shield-alt"></i> Admin Panel</h2>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a href="#users" class="nav-item" data-section="users">
+                    <i class="fas fa-users"></i> Users Management
+                </a>
+                <a href="#messages" class="nav-item" data-section="messages">
+                    <i class="fas fa-envelope"></i> Broadcast Messages
+                </a>
+                <a href="#events" class="nav-item" data-section="events">
+                    <i class="fas fa-calendar"></i> Events
+                </a>
+                <a href="#notifications" class="nav-item" data-section="notifications">
+                    <i class="fas fa-bell"></i> Notifications
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+        
+        <div class="admin-main">
+            <div class="admin-header">
+                <h1 id="sectionTitle">Dashboard</h1>
+                <div class="admin-user">
+                    <span id="adminName">Admin</span>
+                    <div class="admin-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-content">
+                <section id="dashboard" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalUsers">0</h3>
+                                <p>Total Users</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="activeUsers">0</h3>
+                                <p>Active Users</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalProjects">0</h3>
+                                <p>Total Projects</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon red">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalMessages">0</h3>
+                                <p>Total Messages</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-charts">
+                        <div class="chart-card">
+                            <h3>Recent Activity</h3>
+                            <div id="activityList" class="activity-list"></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="users" class="content-section">
+                    <div class="section-header">
+                        <h2>User Management</h2>
+                        <button class="btn btn-primary" onclick="createDummyUser()">
+                            <i class="fas fa-user-plus"></i> Create Dummy User
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Registered</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable">
+                                <tr>
+                                    <td colspan="6" class="text-center">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <section id="messages" class="content-section">
+                    <div class="section-header">
+                        <h2>Broadcast Messages</h2>
+                    </div>
+                    
+                    <div class="broadcast-form">
+                        <h3>Send Message to All Users</h3>
+                        <div class="form-group">
+                            <label>Message Type</label>
+                            <select id="messageType" class="form-control">
+                                <option value="info">Information</option>
+                                <option value="warning">Warning</option>
+                                <option value="success">Success</option>
+                                <option value="error">Error</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="messageTitle" class="form-control" placeholder="Message title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="messageContent" class="form-control" rows="5" placeholder="Type your message... Use *text* for bold and _text_ for italic"></textarea>
+                            <small>Format: *bold* _italic_</small>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="sendBroadcast()">
+                            <i class="fas fa-paper-plane"></i> Send Broadcast
+                        </button>
+                    </div>
+                </section>
+                
+                <section id="events" class="content-section">
+                    <div class="section-header">
+                        <h2>Event Management</h2>
+                        <button class="btn btn-primary" onclick="createEvent()">
+                            <i class="fas fa-plus"></i> Create Event
+                        </button>
+                    </div>
+                    
+                    <div id="eventsList" class="events-grid"></div>
+                </section>
+                
+                <section id="notifications" class="content-section">
+                    <div class="section-header">
+                        <h2>System Notifications</h2>
+                    </div>
+                    
+                    <div class="notification-form">
+                        <h3>Create Notification</h3>
+                        <div class="form-group">
+                            <label>Target User</label>
+                            <select id="notifTarget" class="form-control">
+                                <option value="all">All Users</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Notification Type</label>
+                            <select id="notifType" class="form-control">
+                                <option value="info">Info</option>
+                                <option value="login">Login Alert</option>
+                                <option value="security">Security</option>
+                                <option value="update">Update</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="notifTitle" class="form-control" placeholder="Notification title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="notifMessage" class="form-control" rows="3" placeholder="Notification message"></textarea>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="sendNotification()">
+                            <i class="fas fa-bell"></i> Send Notification
+                        </button>
+                    </div>
+                </section>
+                
+                <section id="settings" class="content-section">
+                    <div class="section-header">
+                        <h2>System Settings</h2>
+                    </div>
+                    
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <h3>User Management</h3>
+                            <div class="setting-item">
+                                <label>Allow Registration</label>
+                                <input type="checkbox" checked>
+                            </div>
+                            <div class="setting-item">
+                                <label>Email Verification Required</label>
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                        
+                        <div class="setting-card">
+                            <h3>Security</h3>
+                            <div class="setting-item">
+                                <label>Enable 2FA</label>
+                                <input type="checkbox">
+                            </div>
+                            <div class="setting-item">
+                                <label>Session Timeout (minutes)</label>
+                                <input type="number" value="30" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Modal</h3>
+            <div id="modalBody"></div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="modalConfirm">Confirm</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/admin.js"></script>
+    <script src="assets/js/protection.js"></script>
+</body>
+</html>
