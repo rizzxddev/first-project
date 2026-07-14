@@ -72,13 +72,12 @@ Overdue tasks get an additional `+0.5` per hour overdue, capped at `+10`. The fu
 ```
 todo-cli/
 ├── main.py            # entry point
-├── todo/
-│   ├── models.py       # Task dataclass + urgency scoring
-│   ├── storage.py      # SQLite persistence
-│   ├── service.py      # business logic (create, complete, rank)
-│   ├── display.py      # terminal rendering
-│   └── cli.py         # argparse wiring
-└── README.md
+├── models.py       # Task dataclass + urgency scoring
+├── storage.py      # SQLite persistence
+├── service.py      # business logic (create, complete, rank)
+├── display.py      # terminal rendering
+└── cli.py         # argparse wiring
+└─ README.md
 ```
 
 Each layer only knows about the one below it: `cli.py` calls `service.py`, `service.py` calls `storage.py`. Swap SQLite for Postgres later and only `storage.py` changes.
